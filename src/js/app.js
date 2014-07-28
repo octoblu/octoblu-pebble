@@ -9,7 +9,6 @@ var UI = require('ui'),
 var main = new UI.Card({
   title: title,
   icon: 'images/menu_icon.png',
-  subtitle: 'Hack the Planet!',
   body: 'Connecting to Meshblu...'
 });
 
