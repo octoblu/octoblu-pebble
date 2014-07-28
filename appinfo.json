@@ -1,0 +1,17 @@
+{
+  "uuid": "3351d055-5f9e-47fd-b6d4-324babcc3516",
+  "shortName": "octoblu-pebble",
+  "longName": "octoblu-pebble",
+  "companyName": "MakeAwesomeHappen",
+  "versionCode": 1,
+  "versionLabel": "1.0.0",
+  "watchapp": {
+    "watchface": false
+  },
+  "appKeys": {
+    "dummy": 0
+  },
+  "resources": {
+    "media": []
+  }
+}
