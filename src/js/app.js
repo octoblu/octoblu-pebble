@@ -4,35 +4,36 @@
 
 var UI = require('ui'),
     skynet = require('./skynet.js'),
-    title = 'Octoblu';
+    octobluTitle = 'Octoblu',
+    meshbluTitle = 'Meshblu';
 
 var main = new UI.Card({
-    title: title,
+    title: octobluTitle,
     icon: 'images/menu_icon.png',
-    body: 'Connecting to Meshblu...'
+    body: 'Connecting to ' + meshbluTitle + '...'
 });
 
 main.show();
 
 skynet.status(function (data) {
-    main.subtitle('Skynet: ' + data.skynet);
+    main.subtitle(meshbluTitle + ': ' + data.skynet);
 });
 
-function showCard(title, msg){
+function showCard(title, msg) {
     var card = new UI.Card();
     card.title(title);
     card.body(msg);
     card.show();
-};
+}
 
 skynet.connect(function (data) {
 
-    var msg = 'Connected to Skynet';
+    var msg = 'Connected to ' + meshbluTitle;
+
     main.body(msg);
 
-    main.on('click', 'select', function (e) {
-        console.log('Clicked Select');
-        showCard('Skynet UUID', data.uuid);
+    main.on('click', 'select', function () {
+        showCard(meshbluTitle + ' UUID', data.uuid);
     });
 
 });
