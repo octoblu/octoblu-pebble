@@ -43,6 +43,9 @@ static SimplyStyle STYLES[] = {
 };
 
 void simply_ui_clear(SimplyUi *self, uint32_t clear_mask) {
+  if (clear_mask & (1 << ClearAction)) {
+    simply_window_action_bar_clear(&self->window);
+  }
   if (clear_mask & (1 << ClearText)) {
     for (SimplyUiTextfield textfield = 0; textfield < NumUiTextfields; ++textfield) {
       simply_ui_set_text(self, textfield, NULL);
@@ -227,11 +230,7 @@ static void show_welcome_text(SimplyUi *self) {
     return;
   }
 
-  simply_ui_set_text(self, UiTitle, "Pebble.js");
-  simply_ui_set_text(self, UiSubtitle, "Write apps with JS!");
-  simply_ui_set_text(self, UiBody, "pebble.github.io/pebblejs");
-
-  simply_window_stack_show(self->window.simply->window_stack, &self->window, true);
+  simply_msg_show_disconnected(self->window.simply->msg);
 }
 
 static void window_load(Window *window) {

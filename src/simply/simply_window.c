@@ -77,10 +77,6 @@ void simply_window_set_background_color(SimplyWindow *self, GColor background_co
 }
 
 void simply_window_set_action_bar(SimplyWindow *self, bool is_action_bar) {
-  if (self->is_action_bar == is_action_bar) {
-    return;
-  }
-
   self->is_action_bar = is_action_bar;
 
   if (!self->action_bar_layer) {
@@ -120,6 +116,8 @@ void simply_window_set_action_bar_background_color(SimplyWindow *self, GColor ba
 }
 
 void simply_window_action_bar_clear(SimplyWindow *self) {
+  simply_window_set_action_bar(self, false);
+
   for (ButtonId button = BUTTON_ID_UP; button <= BUTTON_ID_DOWN; ++button) {
     action_bar_layer_clear_icon(self->action_bar_layer, button);
   }

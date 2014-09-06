@@ -263,6 +263,7 @@ var WindowActionBarPacket = new struct([
   ['uint32', 'select', ImageType],
   ['uint32', 'down', ImageType],
   ['uint8', 'action', BoolType],
+  ['uint8', 'backgroundColor', Color],
 ]);
 
 var ClickPacket = new struct([
@@ -695,7 +696,14 @@ var toActionDef = function(actionDef) {
 };
 
 SimplyPebble.windowActionBar = function(def) {
-  SimplyPebble.sendPacket(WindowActionBarPacket.prop(toActionDef(def)));
+  var actionDef = toActionDef(def);
+  WindowActionBarPacket
+    .up(actionDef.up)
+    .select(actionDef.select)
+    .down(actionDef.down)
+    .action(typeof def === 'boolean' ? def : true)
+    .backgroundColor(actionDef.backgroundColor || 'black');
+  SimplyPebble.sendPacket(WindowActionBarPacket);
 };
 
 SimplyPebble.image = function(id, gbitmap) {
@@ -703,10 +711,7 @@ SimplyPebble.image = function(id, gbitmap) {
 };
 
 var toClearFlags = function(clear) {
-  if (clear === true) {
-    clear = 'all';
-  }
-  if (clear === 'all') {
+  if (clear === true || clear === 'all') {
     clear = ~0;
   } else if (typeof clear === 'string') {
     clear = clearFlagMap[clear];
@@ -916,6 +921,8 @@ SimplyPebble.stage = function(def, clear, pushing) {
     SimplyPebble.windowActionBar(def.action);
   }
 };
+
+SimplyPebble.window = SimplyPebble.stage;
 
 var toArrayBuffer = function(array, length) {
   length = length || array.length;
