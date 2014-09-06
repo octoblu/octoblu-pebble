@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  *  Welcome Octoblu Pebble App
  */
@@ -15,9 +17,7 @@ var main = new UI.Card({
 
 main.show();
 
-skynet.status(function (data) {
-    main.subtitle(meshbluTitle + ': ' + data.skynet);
-});
+//skynet.createConnection({});
 
 function showCard(title, msg) {
     var card = new UI.Card();
