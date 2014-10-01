@@ -5,6 +5,7 @@ var ajax = require('ajax'),
     meshbluUrl = 'http://meshblu.octoblu.com';
 
 var creds = Settings.data('creds') || {};
+var octobluCreds = Settings.data('octobluCreds') || {};
 
 function setData(data){
     creds.uuid = data.uuid;
@@ -69,6 +70,29 @@ lib.message = function(data, resolve, reject){
         headers : {
             skynet_auth_uuid : creds.uuid,
             skynet_auth_token : creds.token
+        },
+        data : data
+    }, function(data){
+        console.log('Sent Message', JSON.stringify(data));
+        resolve(data);
+    }, function(err){
+        console.log('Error Sending Message', JSON.stringify(err));
+        reject(err);
+    });
+
+};
+
+lib.octobluMessage = function(data, resolve, reject){
+
+    console.log('Sending Message via Octoblu User');
+
+    ajax({
+        url : meshbluUrl + '/messages',
+        type : 'json',
+        method : 'POST',
+        headers : {
+            skynet_auth_uuid : octobluCreds.uuid,
+            skynet_auth_token : octobluCreds.token
         },
         data : data
     }, function(data){

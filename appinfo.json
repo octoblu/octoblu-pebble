@@ -5,7 +5,7 @@
   "companyName": "Octoblu",
   "versionCode": 1,
   "versionLabel": "0.4.0",
-  "capabilities": [ ],
+  "capabilities": [ "configurable" ],
   "watchapp": {
     "watchface": false
   },

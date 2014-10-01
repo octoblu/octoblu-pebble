@@ -12,5 +12,20 @@ Pebble.addEventListener('ready', function(e) {
   // Initialize the Pebble protocol
   require('ui/simply-pebble.js').init();
   // Load local file
-  require('app.js');
+  require('app.js').init();
+});
+
+Pebble.addEventListener("webviewclosed",
+  function(e) {
+    var configuration = JSON.parse(decodeURIComponent(e.response));
+    console.log("Configuration window returned: ", JSON.stringify(configuration));
+
+    require('./octobluApi.js').setData(configuration);
+
+    require('app.js').init();
+  }
+);
+
+Pebble.addEventListener('showConfiguration', function(){
+  Pebble.openUrl('https://app.octoblu.com/static/pebble-login.html');
 });
