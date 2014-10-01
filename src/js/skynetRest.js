@@ -35,7 +35,7 @@ lib.register = function(cb){
     ajax({
         url: meshbluUrl + '/devices',
         type: 'json',
-        method : 'GET',
+        method : 'POST',
         data : {
             type : 'pebble'
         }
@@ -72,10 +72,26 @@ lib.message = function(data, resolve, reject){
         },
         data : data
     }, function(data){
-        console.log('Sent Message', data);
+        console.log('Sent Message', JSON.stringify(data));
         resolve(data);
     }, function(err){
-        console.log('Error Sending Message', err);
+        console.log('Error Sending Message', JSON.stringify(err));
+        reject(err);
+    });
+
+};
+
+lib.custom = function(data, resolve, reject){
+
+    console.log('Custom Request');
+    data.url = meshbluUrl + data.path;
+    delete data.path;
+    data.json = 'json';
+    ajax(data, function(data){
+        console.log('Response Custom', JSON.stringify(data));
+        resolve(data);
+    }, function(err){
+        console.log('Error Custom', JSON.stringify(err));
         reject(err);
     });
 

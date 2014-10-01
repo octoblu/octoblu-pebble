@@ -1,6 +1,6 @@
 # Octoblu Pebble App
 
-Connect your Pebble watch to Skynet.im
+Connect your Pebble watch to Meshblu
 
 ## Prerequisites
 
@@ -10,6 +10,7 @@ Connect your Pebble watch to Skynet.im
 
 ## Installation & Testing:
 
-1. `git clone git@github.com:octoblu/octoblu-pebble.git`
-2. `cd octoblu-pebble`
+1. `git clone git@github.com:octoblu/pebble.git`
+2. `cd pebble`
 3. `pebble build`
+4. `pebble install --phone [:ip address]`
